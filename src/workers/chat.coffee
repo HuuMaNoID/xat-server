@@ -5,8 +5,7 @@ math = require '../utils/math'
 builder = require '../utils/builder'
 logger = new (require '../utils/logger')(name: 'Chat')
 
-module.exports =
-  joinRoom: ->
+joinRoom = ->
     return if @user.chat < 1
 
     database.exec('SELECT * FROM chats WHERE id = ? LIMIT 1', [@user.chat]).then((data) =>
@@ -138,6 +137,15 @@ module.exports =
         # )
       )
     )
+
+changePool = (poolId) ->
+  @broadcast builder.create('l').append('u', @user.id).compose()
+  @chat.onPool = poolId
+  joinRoom.call(@)
+
+module.exports =
+  joinRoom: joinRoom
+  changePool: changePool
 
   sendMessage: (user, message) ->
     @broadcast builder.create('m').append('t', message).append('u', user).compose()
