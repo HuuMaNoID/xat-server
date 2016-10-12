@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "5.11"
+addons:
+  mariadb: "10.0"
+services:
+  - mysql
+before_script:
+  - script/download-db-script script/database.sql
+  - mysql -e 'create database xat;' -uroot
+  - mysql xat -uroot < script/database.sql

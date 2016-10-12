@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+wget -O "$1" "https://raw.githubusercontent.com/iiegor/xat-www-hapi/41993669b4946b7eb3c60cbf6f33e56d27c6325b/migrations/database.sql"
