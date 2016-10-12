@@ -9,10 +9,9 @@ deploy = test.deployServer
 describe 'ranks', ->
   server = null
 
-  before (done) ->
+  before ->
     deploy().then (_server) ->
       server = _server
-      done()
 
   after -> server.kill()
 
